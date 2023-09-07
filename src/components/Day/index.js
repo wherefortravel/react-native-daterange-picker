@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { TouchableOpacity, StyleSheet, Text, View } from "react-native";
 import { height, width } from "../../modules";
 
@@ -14,9 +14,14 @@ const Day = ({
   dayTextStyle,
   disabledTextStyle,
   empty,
+  disabledByPolicy,
+  onDisabledByPolicySelect
 }) => {
   const selectThis = () => {
-    if (!disabled) {
+    if (disabledByPolicy) {
+      onDisabledByPolicySelect()      
+    }
+    if (!disabled && !disabledByPolicy) {
       select(index);
     }
   };
@@ -32,6 +37,16 @@ const Day = ({
     ...styles.disabled,
     ...disabledStyle,
   };
+  const disabledByPolicyStyle = {
+    backgroundColor: 'rgba(246,152,51,0.3)',
+    height: "80%",
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  }
+  const disabledByPolicyTextStyle = {
+    color: '#b83900'
+  }
   const disabledTextStyles = {
     ...styles.disabledText,
     ...disabledTextStyle,
@@ -45,6 +60,7 @@ const Day = ({
     ...selectedTextStyle,
   };
   return (
+    <>    
     <TouchableOpacity key={"day-" + index} onPress={empty ? null : selectThis}>
       <View style={styles.day}>
         <View
@@ -52,6 +68,7 @@ const Day = ({
             ...dayStyles,
             ...(selected && selectedStyles),
             ...(disabled && disabledStyles),
+            ...(disabledByPolicy && disabledByPolicyStyle)
           }}
         >
           <Text
@@ -59,6 +76,7 @@ const Day = ({
               ...dayTextStyles,
               ...(selected && selectedTextStyles),
               ...(disabled && disabledTextStyles),
+              ...(disabledByPolicy && disabledByPolicyTextStyle)
             }}
           >
             {index}
@@ -66,6 +84,7 @@ const Day = ({
         </View>
       </View>
     </TouchableOpacity>
+    </>
   );
 };
 

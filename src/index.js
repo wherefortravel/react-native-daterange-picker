@@ -47,6 +47,8 @@ const DateRangePicker = ({
   buttonTextStyle,
   presetButtons,
   open,
+  disabledDatesByPolicy,
+  onDisabledByPolicySelect
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [weeks, setWeeks] = useState([]);
@@ -248,6 +250,8 @@ const DateRangePicker = ({
         let _date = _moment(displayedDate).set("date", i);
         let _selected = selected(_date, startDate, endDate, date);
         let _disabled = disabled(_date, minDate, maxDate);
+
+        let isDisabled = disabledDatesByPolicy.some(x => x.isSame(_date, 'day'))
         week.push(
           <Day
             key={`day-${i}`}
@@ -261,6 +265,8 @@ const DateRangePicker = ({
             selected={_selected}
             disabled={_disabled}
             select={select}
+            disabledByPolicy={isDisabled}
+            onDisabledByPolicySelect={onDisabledByPolicySelect}
           />
         );
         if ((i + offset) % 7 === 0 || i === daysInMonth) {
