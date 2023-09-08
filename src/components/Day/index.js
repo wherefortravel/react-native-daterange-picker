@@ -68,7 +68,7 @@ const Day = ({
             ...dayStyles,
             ...(selected && selectedStyles),
             ...(disabled && disabledStyles),
-            ...(disabledByPolicy && disabledByPolicyStyle)
+            ...((!disabled && disabledByPolicy) && disabledByPolicyStyle)
           }}
         >
           <Text
@@ -76,7 +76,7 @@ const Day = ({
               ...dayTextStyles,
               ...(selected && selectedTextStyles),
               ...(disabled && disabledTextStyles),
-              ...(disabledByPolicy && disabledByPolicyTextStyle)
+              ...((!disabled && disabledByPolicy) && disabledByPolicyTextStyle)
             }}
           >
             {index}
