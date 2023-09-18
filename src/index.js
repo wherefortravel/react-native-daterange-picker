@@ -251,7 +251,7 @@ const DateRangePicker = ({
         let _selected = selected(_date, startDate, endDate, date);
         let _disabled = disabled(_date, minDate, maxDate);
         
-        let isDisabled = disabledDatesByPolicy.includes(_date.format('YYYY-MM-DD'))
+        let isDisabled = disabledDatesByPolicy?.includes(_date.format('YYYY-MM-DD'))
         week.push(
           <Day
             key={`day-${i}`}
