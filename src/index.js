@@ -48,7 +48,9 @@ const DateRangePicker = ({
   presetButtons,
   open,
   disabledDatesByPolicy,
-  onDisabledByPolicySelect
+  onDisabledByPolicySelect,
+  monthPrevTestID,
+  monthNextTestID
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [weeks, setWeeks] = useState([]);
@@ -341,7 +343,7 @@ const DateRangePicker = ({
         <View>
           <View style={mergedStyles.container}>
             <View style={styles.header}>
-              <TouchableOpacity onPress={previousMonth}>
+              <TouchableOpacity testID={monthPrevTestID} onPress={previousMonth}>
                 {monthPrevButton || (
                   <Image
                     resizeMode="contain"
@@ -355,7 +357,7 @@ const DateRangePicker = ({
                   " " +
                   displayedDate.format("YYYY")}
               </Text>
-              <TouchableOpacity onPress={nextMonth}>
+              <TouchableOpacity testID={monthNextTestID} onPress={nextMonth}>
                 {monthNextButton || (
                   <Image
                     resizeMode="contain"
