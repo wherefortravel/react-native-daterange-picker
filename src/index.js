@@ -50,7 +50,8 @@ const DateRangePicker = ({
   disabledDatesByPolicy,
   onDisabledByPolicySelect,
   monthPrevTestID,
-  monthNextTestID
+  monthNextTestID,
+ generateDayTestId,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [weeks, setWeeks] = useState([]);
@@ -257,6 +258,7 @@ const DateRangePicker = ({
         week.push(
           <Day
             key={`day-${i}`}
+            testID={generateDayTestId && generateDayTestId(i)}
             selectedStyle={selectedStyle}
             selectedTextStyle={selectedTextStyle}
             disabledStyle={disabledStyle}
